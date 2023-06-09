@@ -12,7 +12,7 @@ const Navbar = () => {
   return (
     <div className="root-layout py-4">
       <nav>
-        <Container className="w-25">
+        <Container className="w-25 p-0">
           <img src={BRANND_IMAGES.FullLogo} alt="logo" />
         </Container>
 

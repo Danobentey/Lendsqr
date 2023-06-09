@@ -1,13 +1,14 @@
 @use '../../styles/colors.scss' as *;
 
 .root-layout {
-  margin-left: 30px;
+  padding-left: 30px;
   height: 100px;
   padding: auto;
+  background-color: $white;
+  box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
   nav {
     color: $primary-text;
     font-weight: 500;
-    background-color: $white;
     align-items: center;
     display: flex;
     justify-content: flex-end;

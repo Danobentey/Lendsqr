@@ -1,0 +1,43 @@
+@use "../../styles/colors.scss" as *;
+
+.sidebar {
+  background-color: $white;
+  margin: 0;
+  padding-left: 30px;
+  padding-top: 40px;
+  // border: solid black;
+  width: fit-content;
+  z-index: -1;
+  position: relative;
+  
+  a {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    color: $primary-text;
+    line-height: 40px;
+    height: 40px;
+    position: relative;
+    text-decoration: none;
+    &:first-child {
+      opacity: 1;
+    }
+    &:hover {
+      opacity: 1;
+    }
+    svg, img {
+      padding-right: 10px;
+      opacity: 0.5;
+    }
+    span {
+      vertical-align: middle;
+    }
+  }
+  p {
+    color: $primary-text;
+    font-weight: 600;
+    font-size: 12px;
+    margin: 0;
+  }
+
+}
