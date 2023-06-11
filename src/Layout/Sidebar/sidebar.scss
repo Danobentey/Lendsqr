@@ -66,6 +66,9 @@
 @media screen and (max-width: 480px) {
   .sidebar {
     background-color: $primary;
+    .arrow-box {
+      display: none;
+    }
   }
 }
 

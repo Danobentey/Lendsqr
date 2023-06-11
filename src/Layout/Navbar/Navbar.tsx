@@ -10,7 +10,7 @@ const Navbar = () => {
     <div className="nav-container py-4">
       <nav>
         <Container className="w-25 p-0 brand">
-          <img className="d-block" src={BRANND_IMAGES.BrandLogo} alt="logo" />
+          <img className="d-block logo" src={BRANND_IMAGES.BrandLogo} alt="logo" />
           <img className="pt-1" src={BRANND_IMAGES.BrandText} alt="logo" />
         </Container>
 
