@@ -1,26 +1,89 @@
 @use '../../styles/colors.scss' as *;
 
-.root-layout {
+.nav-container {
   padding-left: 30px;
   height: 100px;
   padding: auto;
   background-color: $white;
   box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
+  z-index: 2;
   nav {
     color: $primary-text;
     font-weight: 500;
     align-items: center;
     display: flex;
     justify-content: flex-end;
+    
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
     .search-bar {
       margin-left: 100px;
     }
     .user {
       justify-content: space-evenly;
       align-items: center;
+
+      .docs {
+        padding: 7px 10px;
+
+        &:hover {
+          background-color: $primary;
+          text-decoration: none;
+          border-radius: 4px;
+        }
+      }
     }
       button {
       background-color: $primary;
     }
   }
+}
+
+// Mobile View
+@media screen and (max-width: 480px) {
+  .nav-container {
+    
+  }
+}
+
+
+// Tablet View
+@media screen and (max-width: 720px) {
+  .nav-container {
+    padding: 0;
+    
+    .brand :nth-child(2) {
+      display: none;
+    }
+    .user {
+      justify-content: center;
+      margin-right: 0;
+      padding: 0;
+    }
+    .search-bar {
+      display: none;
+    }
+    svg {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .nav-container {
+
+    .user {
+      span {
+      text-transform: uppercase;
+      } 
+      img, svg {
+        display: none;
+      }
+  }
+
+  }
+
 }

@@ -1,6 +1,3 @@
-// import { useState } from "react";
-// import { Button, Collapse, Input, InputGroup, Nav, NavItem, Navbar, NavbarBrand, NavbarToggler, } from "reactstrap";
-// import { NavLink } from "react-router-dom";
 import { BRANND_IMAGES } from "../../assets/img/brand";
 import { Button, Container, Input, InputGroup, NavLink } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,10 +7,11 @@ import './navbar.scss'
 
 const Navbar = () => {
   return (
-    <div className="root-layout py-4">
+    <div className="nav-container py-4">
       <nav>
-        <Container className="w-25 p-0">
-          <img src={BRANND_IMAGES.FullLogo} alt="logo" />
+        <Container className="w-25 p-0 brand">
+          <img className="d-block" src={BRANND_IMAGES.BrandLogo} alt="logo" />
+          <img className="pt-1" src={BRANND_IMAGES.BrandText} alt="logo" />
         </Container>
 
         <Container className="search-bar fluid">
@@ -40,20 +38,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
-/* <Navbar>
-  <NavbarBrand href="/">
-  </NavbarBrand>
-  <NavbarToggler onClick={() => {setIsOpen(!isOpen)}} />
-  <Collapse isOpen={isOpen} navbar>
-    <Nav className="me-auto" navbar>
-      <NavItem>
-        
-      </NavItem>
-      <NavItem>
-       <NavLink to="/">Docs</NavLink>
-      </NavItem>
-    </Nav>
-  </Collapse>
-  
-</Navbar> */
+export default Navbar;
