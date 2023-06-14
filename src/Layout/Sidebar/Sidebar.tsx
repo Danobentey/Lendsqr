@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
   faArrowLeft,
-  faBriefcase,
   faHouseChimney,
   faUsers,
   faUserGroup,
@@ -32,7 +31,8 @@ const Sidebar = () => {
 
       <Container className={`sidebar-content ${sidebarCollapse ? "" : "unCollapse"}`}>
         <NavLink to={"/"}>
-          <FontAwesomeIcon icon={faBriefcase} />
+          <img src={BRAND_ICONS.Briefcase} alt="" />
+          {/* <FontAwesomeIcon icon={faBriefcase} /> */}
           <span>Switch Organization</span>
           <img className="mx-2 " src={BRAND_ICONS.CaretDown} alt="" />
         </NavLink>
@@ -42,9 +42,9 @@ const Sidebar = () => {
           <span>Dashboard</span>
         </NavLink>
 
-        {sidebarCollapse && <p className="mt-3 fw-2">CUSTOMERS</p>}
+        {sidebarCollapse && <p className="m-3 fw-2">CUSTOMERS</p>}
 
-        <NavLink to={"/"}>
+        <NavLink to={"/users"}>
           <FontAwesomeIcon icon={faUserGroup} />
           <span>Users</span>
         </NavLink>

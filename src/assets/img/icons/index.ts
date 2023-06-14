@@ -12,6 +12,7 @@ import UserFail from './user-times.png';
 import Handshake from './handshake.png';
 import HandCash from './hand-cash.png'
 import UserGuarantors from './users-guarantors.png';
+import BarFilter from './filter-icon.png';
 
 
 
@@ -30,4 +31,5 @@ export const BRAND_ICONS = {
   UserFail,
   UserGuarantors,
   Handshake,
+  BarFilter,
 }

@@ -1,13 +1,12 @@
 @use '../../styles/colors.scss' as *;
 
 .nav-container {
-  padding-left: 30px;
   height: 100px;
-  padding: auto;
   background-color: $white;
   box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
   z-index: 2;
   nav {
+    padding-left: 30px;
     color: $primary-text;
     font-weight: 500;
     align-items: center;
