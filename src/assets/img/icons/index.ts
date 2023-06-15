@@ -13,6 +13,7 @@ import Handshake from './handshake.png';
 import HandCash from './hand-cash.png'
 import UserGuarantors from './users-guarantors.png';
 import BarFilter from './filter-icon.png';
+import EyeView from './view-eye.png'
 
 
 
@@ -32,4 +33,5 @@ export const BRAND_ICONS = {
   UserGuarantors,
   Handshake,
   BarFilter,
+  EyeView,
 }
