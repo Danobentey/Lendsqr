@@ -36,8 +36,8 @@ const ViewUserDatails = () => {
     return <h2>Loading...</h2>;
   }
 
-  if (userId === undefined) {
-    return <h2>User Not found</h2>;
+  if (user === undefined) {
+    return <h2>User Not found - Go back to <a href={pageRoutes.ALL_USERS}>Users Page</a></h2>;
   }
 
   return (
