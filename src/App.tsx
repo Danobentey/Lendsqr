@@ -25,8 +25,8 @@ const router = createBrowserRouter(
         <Route path={pageRoutes.ALL_USERS} element={<ViewAllUsers />} />
         <Route path={`${pageRoutes.USERS}/:userId`} element={<ViewUserDatails />} />
       </Route>
-      <Route path={Layout.Auth}>
-        <Route path="/*" element={<Login />} />
+      <Route>
+        <Route index path="*" element={<Login />} />
         <Route path={pageRoutes.LOGIN} element={<Login />} />
       </Route>
     </>

@@ -27,14 +27,17 @@ const ViewUserDatails = () => {
   console.log(userId);
   
   useEffect(() => {
-    const fetchData = async () => {
-      const {usersData} = await storageUtils.getParsedFromLocalStorage("allUsers");
+    const fetchData = () => {
+      const usersData =  storageUtils.getParsedFromLocalStorage("allUsers");
       setAllUser(usersData);
       setLoading(false);
     };
-
+    
     fetchData();
   }, []);
+  
+
+
 
   console.log(allUser);
 

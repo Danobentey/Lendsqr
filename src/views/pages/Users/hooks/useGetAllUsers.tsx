@@ -11,9 +11,10 @@ export const useGetAllUsers = () => {
    ["allUsers"],
     () => userService.getAllUsers(),
   );
-  localStorage.setItem("allUsers", JSON.stringify(data?.data));
+  const store = localStorage.setItem("allUsers", JSON.stringify(data?.data));
 
   return {
+    store: store,
     allUsers: data?.data,
     loading: isLoading,
     refetch: async () => {

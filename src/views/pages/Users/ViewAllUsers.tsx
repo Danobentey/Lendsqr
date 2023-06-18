@@ -45,7 +45,10 @@ const ViewAllUsers = () => {
   const currentTableData = useMemo(() => {
     const lastPageIndex = currentPage * PageSize;
     const firstPageIndex = lastPageIndex - PageSize;
+
+    if (allUsers) console.log(allUsers.slice(firstPageIndex, lastPageIndex));
     if (allUsers) return allUsers.slice(firstPageIndex, lastPageIndex);
+    
   }, [currentPage, allUsers]);
   
   return (
