@@ -7,6 +7,7 @@ import { BRAND_ICONS } from "../../../assets/img/icons";
 import storageUtils from "../../../utils/storageUtils";
 import { pageRoutes } from "../../../variables/pageRoutes";
 import { UserInfo } from "../../../components/userInfo";
+import { useEffect, useState } from "react";
 
 interface UserData {
   id: string;
@@ -20,12 +21,26 @@ interface UserData {
 
 const ViewUserDatails = () => {
   const { userId } = useParams();
+  const [allUser, setAllUser] = useState<UserData[]>([]);
+  const [loading, setLoading] = useState(true);
 
   console.log(userId);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      const {usersData} = await storageUtils.getParsedFromLocalStorage("allUsers");
+      setAllUser(usersData);
+      setLoading(false);
+    };
 
-  const allUser: UserData[] =
-    storageUtils.getParsedFromLocalStorage("allUsers");
+    fetchData();
+  }, []);
+
   console.log(allUser);
+
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
 
   if (userId === undefined) {
     return <h2>User Not found</h2>;
@@ -40,6 +55,7 @@ const ViewUserDatails = () => {
   if (!selectedUser) {
     return <h2>User Not found</h2>;
   }
+
 
   return (
     <Container className="user-details">
@@ -87,12 +103,12 @@ const ViewUserDatails = () => {
             </div>
           </div>
           <div className="nav-footer">
-            <NavLink>General Details</NavLink>
-            <NavLink>Documents</NavLink>
-            <NavLink>Bank Details</NavLink>
-            <NavLink>Loans</NavLink>
-            <NavLink>Savings</NavLink>
-            <NavLink>Apps and System</NavLink>
+            <NavLink to={"#"}>General Details</NavLink>
+            <NavLink to={"#"}>Documents</NavLink>
+            <NavLink to={"#"}>Bank Details</NavLink>
+            <NavLink to={"#"}>Loans</NavLink>
+            <NavLink to={"#"}>Savings</NavLink>
+            <NavLink to={"#"}>Apps and System</NavLink>
           </div>
 
           <div className="customer-info">
