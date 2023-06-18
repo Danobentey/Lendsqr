@@ -9,31 +9,20 @@ import {
   Table,
   UncontrolledPopover,
 } from "reactstrap";
+
 import Dashboard from "../../../components/Dashboard/Dashboard";
 import { BRAND_ICONS } from "../../../assets/img/icons";
-import api from "../../../variables/api";
-import axios from "axios";
-import storageUtils from "../../../utils/storageUtils";
+// import storageUtils from "../../../utils/storageUtils";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
-import { Pagination } from "../../../components/Pagiantion";
-import { useEffect, useState } from "react";
-import Paginate from "../../../components/Pageinate/Paginate";
+import { useMemo, useState } from "react";
+import Pagination from "../../../components/Pagination/Pagination";
 import { useGetAllUsers } from "./hooks/useGetAllUsers";
-import Skeleton from "react-loading-skeleton";
+import { pageRoutes } from "../../../variables/pageRoutes";
 
 interface VerificationStatusColor {
   [key: string]: string;
-}
-
-export interface UserData {
-  Organization: string;
-  username: string;
-  email: string;
-  phone_number: string;
-  date_joined: string;
-  verification_status: string;
 }
 
 const verificationStatusColor: VerificationStatusColor = {
@@ -43,42 +32,29 @@ const verificationStatusColor: VerificationStatusColor = {
   Blacklisted: "danger",
 };
 
+const PageSize = 10;
+
 const ViewAllUsers = () => {
-  const [userData, setUserData] = useState<UserData[]>([]);
-  // const { allUsers } = useGetAllUsers();
+  const { allUsers, loading } = useGetAllUsers();
 
-  const allUsers :UserData[] = storageUtils.getParsedFromLocalStorage("allUsers")
-  // useEffect(() => {
-  //   const getAllUsers = async () => {
-  //     const res = await axios.get(api.FETCH_ALL_USERS);
-  //     const users = res.data;
-  //     setUserData(users);
-
-  //     localStorage.setItem("allUsers", JSON.stringify(users));
-  //   };
-
-  //   getAllUsers();
-  // }, []);
-
-  // setUserData(allUsers)
-
-  //Pagination
+  // const allUsers: UserData[] =
+  //   storageUtils.getParsedFromLocalStorage("allUsers");
+  
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
-
-  const indexOfLastitem = currentPage * itemsPerPage;
-  const indexOfFirstitem = indexOfLastitem / itemsPerPage;
-  const currentItems = userData.slice(indexOfFirstitem, indexOfLastitem);
-  // setUserData(currentItems);
-
-  // const pageChange = (pageNumber: number) => setCurrentPage(pageNumber);
-
+  
+  const currentTableData = useMemo(() => {
+    const lastPageIndex = currentPage * PageSize;
+    const firstPageIndex = lastPageIndex - PageSize;
+    if (allUsers) return allUsers.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, allUsers]);
+  
   return (
     <>
       <Dashboard />
       <Container className="mt-5 users-table" fluid>
-        {!!allUsers?.length && (
-          <Container className="table-responsive-xl">
+        {loading && <h3 className="mx-5">Loading... - Please Wait</h3>}
+        {!!currentTableData?.length && !!allUsers?.length && (
+          <Container className="table table-responsive-xl">
             <Table className={"p-5"} responsive>
               <thead className="p-5">
                 <th>
@@ -110,9 +86,9 @@ const ViewAllUsers = () => {
                 </th>
               </thead>
               <tbody>
-                {allUsers.map((i) => (
+                {currentTableData.map((i) => (
                   <tr key={i.username}>
-                    <td className="p-3">{i.Organization}</td>
+                    <td className="p-3">{i.organization}</td>
                     <td className="p-3">{i.username}</td>
                     <td className="p-3">{i.email}</td>
                     <td className="p-3">{i.phone_number}</td>
@@ -125,31 +101,31 @@ const ViewAllUsers = () => {
                       </Badge>
                     </td>
                     <td className="p-3">
-                      <Button color="link" id={i.Organization}>
+                      <Button color="link" id={i.organization}>
                         <FontAwesomeIcon icon={faEllipsisVertical} />
                       </Button>
                       <UncontrolledPopover
                         placement="left"
-                        target={i.Organization}
+                        target={i.organization}
                         trigger="legacy"
                       >
                         <PopoverBody>
                           <ListGroup flush>
                             <ListGroupItem>
-                              <Link to={"#"}>
-                                <img src={BRAND_ICONS.EyeView} alt="x" />
-                                View User Detail
+                              <Link className={'text-decoration-none'} to={`${pageRoutes.USERS}/${i.id}`}>
+                                <img src={BRAND_ICONS.EyeView} alt="x" className="px-2" />
+                                View User Details
                               </Link>
                             </ListGroupItem>
                             <ListGroupItem>
-                              <Link to={`#`}>
-                                <img src={BRAND_ICONS.UserCheck} alt="X" />
+                              <Link to={`#`} className={'text-decoration-none'}>
+                                <img src={BRAND_ICONS.UserCheck} alt="X" className="px-2" />
                                 Activate User
                               </Link>
                             </ListGroupItem>
                             <ListGroupItem>
-                              <Link to={`#`}>
-                                <img src={BRAND_ICONS.UserFail} alt="X" />
+                              <Link to={`#`} className={'text-decoration-none'}>
+                                <img src={BRAND_ICONS.UserFail} alt="X" className="px-2"/>
                                 Blacklist User
                               </Link>
                             </ListGroupItem>
@@ -161,16 +137,17 @@ const ViewAllUsers = () => {
                 ))}
               </tbody>
             </Table>
+            <CardFooter className="footer">
+              <Pagination
+                className="pagination-bar"
+                currentPage={currentPage}
+                totalCount={allUsers.length}
+                pageSize={PageSize}
+                onPageChange={(page: number) => setCurrentPage(page)}
+              />
+            </CardFooter>
           </Container>
         )}
-
-        {/* <CardFooter>
-          <Paginate
-            itemsPerPage={itemsPerPage}
-            totalItems={userData.length}
-            // pageNum={currentItems}
-          />
-        </CardFooter> */}
       </Container>
     </>
   );

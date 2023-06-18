@@ -55,7 +55,7 @@
       transition: ease-in-out 3000ms;
       transition-duration: 3000ms;
     }
-    img :not(:nth-child(1)) {
+    a :not(:nth-child(1)) {
       display: none;
     }
   }
@@ -71,15 +71,3 @@
   }
 }
 
-// Medium Screen
-@media screen and (max-width: 720px) {
-  .sidebar {
-    // background-color: $primary;
-  }
-}
-
-// Larger Screens
-@media screen and (max-width: 1024px) {
-  .sidebar {
-  }
-}
