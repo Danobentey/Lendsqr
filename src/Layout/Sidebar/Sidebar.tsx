@@ -25,7 +25,7 @@ declare global {
 }
 
 const Sidebar = () => {
-  const [sidebarCollapse, setSidebarCollapse] = useState(true);
+  const [sidebarCollapse, setSidebarCollapse] = useState(false);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (event.target instanceof Node && !event.target.closest('.sidebar')) {
@@ -50,7 +50,7 @@ const Sidebar = () => {
       </div>
 
       <Container className={`sidebar-content ${sidebarCollapse ? "" : "unCollapse"}`} >
-        <NavLink to={"#"} onClick={() => setSidebarCollapse(!sidebarCollapse)}>
+        <NavLink to={"#"} onClick={() => setSidebarCollapse(true)}>
           <img src={BRAND_ICONS.Briefcase} alt="" />
           {/* <FontAwesomeIcon icon={faBriefcase} /> */}
           <span>Switch Organization</span>
