@@ -1,5 +1,4 @@
 import {
-  Navigate,
   Route,
   RouterProvider,
   // Routes,
@@ -24,11 +23,10 @@ const router = createBrowserRouter(
       <Route path={Layout.Admin} element={<RootLayout />}>
         <Route path={pageRoutes.DASHBOARD} element={<Dashboard />} />
         <Route path={pageRoutes.ALL_USERS} element={<ViewAllUsers />} />
-        <Route path={`${pageRoutes.ALL_USERS}/id`} element={<Login />} />
         <Route path={`${pageRoutes.USERS}/:userId`} element={<ViewUserDatails />} />
-        <Route path="*" element={<Navigate to={pageRoutes.DASHBOARD} replace />}/>
       </Route>
       <Route path={Layout.Auth}>
+        <Route path="/*" element={<Login />} />
         <Route path={pageRoutes.LOGIN} element={<Login />} />
       </Route>
     </>
