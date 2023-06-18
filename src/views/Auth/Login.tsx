@@ -21,9 +21,9 @@ export const Login = () => {
       <img src={BRANND_IMAGES.FullLogo} alt="" />
       <div>
         <div>
-          <img src={BRANND_IMAGES.LandingPagePic} alt="" />
+          <img className="landing-image" src={BRANND_IMAGES.LandingPagePic} alt="" />
         </div>
-        <div>
+        <div className="form-container">
           <div>
             <h1>Welcome!</h1>
             <p>Enter details to login.</p>

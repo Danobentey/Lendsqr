@@ -12,15 +12,23 @@ body {
   margin: 0;
   height: 100vh;
   width: 100vw;
-  padding: 100px;
+  padding: 50px;
+
+  .landing-image {
+    margin-right: -50px;
+  }
 
   > div {
     margin: auto;
-    padding: 40px 70px;
+    padding: 40px 0;
     display: flex;
     flex-direction: row;
     gap: 20px;
     justify-content: space-evenly;
+
+    .landing-image {
+      width: 550px;
+    }
     > * {
       padding: 50px;
     }
@@ -57,10 +65,19 @@ body {
     }
   }
 }
+
+@media screen and (max-width: 720px) {
+  .landing-image {
+    display: none;
+  }
+}
+
+// Admin
+
 .main-content {
   position: relative;
   margin-left: 100px;
-  margin-top: 150px;
+  margin-top: 50px;
   top: -100vh;
   left: 5vw;
   width: 80vw;
@@ -210,7 +227,28 @@ body {
 // TODO: handle mobile responsiveness
 
 @media screen and (max-width: 920px) {
+  .login-page {
+    >div {
+      display: block;
+    }
+    .form-container {
+      text-align: center;
+      width: 60vw;
+      display: block;
+      margin: auto;
+    }
+    .landing-image {
+      display: none;
+    }
+  }
   .user-primary-info {
     height: fit-content;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .main-content {
+    top: 0;
+    margin-left: 10px;
   }
 }

@@ -26,10 +26,10 @@ interface VerificationStatusColor {
 }
 
 const verificationStatusColor: VerificationStatusColor = {
-  Active: "success",
-  Pending: "warning",
-  Inactive: "dark",
-  Blacklisted: "danger",
+  active: "success",
+  pending: "warning",
+  inactive: "dark",
+  blacklisted: "danger",
 };
 
 const PageSize = 10;
@@ -48,7 +48,7 @@ const ViewAllUsers = () => {
 
     if (allUsers) console.log(allUsers.slice(firstPageIndex, lastPageIndex));
     if (allUsers) return allUsers.slice(firstPageIndex, lastPageIndex);
-    
+
   }, [currentPage, allUsers]);
   
   return (

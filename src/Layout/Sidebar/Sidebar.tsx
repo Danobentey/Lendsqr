@@ -50,7 +50,7 @@ const Sidebar = () => {
       </div>
 
       <Container className={`sidebar-content ${sidebarCollapse ? "" : "unCollapse"}`} >
-        <NavLink to={"#"}>
+        <NavLink to={"#"} onClick={() => setSidebarCollapse(!sidebarCollapse)}>
           <img src={BRAND_ICONS.Briefcase} alt="" />
           {/* <FontAwesomeIcon icon={faBriefcase} /> */}
           <span>Switch Organization</span>

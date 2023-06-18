@@ -1,13 +1,14 @@
+import { useEffect } from "react";
 import { Button, Container } from "reactstrap";
 import { Link, NavLink, useParams } from "react-router-dom";
 
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BRAND_ICONS } from "../../../assets/img/icons";
-import storageUtils from "../../../utils/storageUtils";
 import { pageRoutes } from "../../../variables/pageRoutes";
 import { UserInfo } from "../../../components/userInfo";
-import { useEffect, useState } from "react";
+import useGetUserDetails from "./hooks/useGetUserDetails";
+import { useState } from "react";
 
 interface UserData {
   id: string;
@@ -21,25 +22,15 @@ interface UserData {
 
 const ViewUserDatails = () => {
   const { userId } = useParams();
-  const [allUser, setAllUser] = useState<UserData[]>([]);
+  const [user, setUser] = useState<UserData>();
   const [loading, setLoading] = useState(true);
 
-  console.log(userId);
-  
+  const { userSelect } = useGetUserDetails(userId as string);
+
   useEffect(() => {
-    const fetchData = () => {
-      const usersData =  storageUtils.getParsedFromLocalStorage("allUsers");
-      setAllUser(usersData);
-      setLoading(false);
-    };
-    
-    fetchData();
-  }, []);
-  
-
-
-
-  console.log(allUser);
+    setUser(userSelect);
+    setLoading(false);
+  }, [setUser, setLoading, userSelect]);
 
   if (loading) {
     return <h2>Loading...</h2>;
@@ -48,17 +39,6 @@ const ViewUserDatails = () => {
   if (userId === undefined) {
     return <h2>User Not found</h2>;
   }
-
-  const numericUserId = parseInt(userId, 10); // Convert userId to a number
-
-  const selectedUser = allUser.find(
-    (user) => user.id === numericUserId.toString()
-  );
-
-  if (!selectedUser) {
-    return <h2>User Not found</h2>;
-  }
-
 
   return (
     <Container className="user-details">
@@ -82,15 +62,15 @@ const ViewUserDatails = () => {
         </div>
       </div>
 
-      {!!selectedUser && (
+      {!!user && (
         <Container>
           <div className="user-primary-info">
             <div>
               <img src={BRAND_ICONS.Avater} alt="avater" width={100} />
             </div>
             <div>
-              <b>{selectedUser.username}</b>
-              <p>{selectedUser.id}</p>
+              <b>{user.username}</b>
+              <p>{user.id}</p>
             </div>
             <div>
               <h4>User's Tier</h4>
@@ -118,13 +98,10 @@ const ViewUserDatails = () => {
             <div className="personal-info">
               <h1>Personal Information</h1>
               <div>
-                <UserInfo title="FULLNAME" info={selectedUser.username} />
-                <UserInfo
-                  title="PHONE NUMBER"
-                  info={selectedUser.phone_number}
-                />
-                <UserInfo title="EMAIL ADDRESS" info={selectedUser.email} />
-                <UserInfo title="BVN" info={selectedUser.phone_number} />
+                <UserInfo title="FULLNAME" info={user.username} />
+                <UserInfo title="PHONE NUMBER" info={user.phone_number} />
+                <UserInfo title="EMAIL ADDRESS" info={user.email} />
+                <UserInfo title="BVN" info={user.phone_number} />
                 <UserInfo title="GENDER" info="Female" />
                 <UserInfo title="MARITAL STATUS" info="Single" />
                 <UserInfo title="CHILDREN" info="None" />
@@ -148,36 +125,27 @@ const ViewUserDatails = () => {
             <div className="socials">
               <h1>Socials</h1>
               <div>
-                <UserInfo title="TWITTER" info={`@${selectedUser.username}`} />
-                <UserInfo title="FACEBOOK" info={selectedUser.username} />
-                <UserInfo
-                  title="INSTAGRAM"
-                  info={`@${selectedUser.username}`}
-                />
+                <UserInfo title="TWITTER" info={`@${user.username}`} />
+                <UserInfo title="FACEBOOK" info={user.username} />
+                <UserInfo title="INSTAGRAM" info={`@${user.username}`} />
               </div>
             </div>
 
             <div className="guarantors">
               <h1>Guarantors</h1>
               <div className="guarantor-1">
-                <UserInfo title="FULLNAME" info={selectedUser.username} />
-                <UserInfo
-                  title="PHONE NUMBER"
-                  info={selectedUser.phone_number}
-                />
-                <UserInfo title="EMAIL ADDRESS" info={selectedUser.email} />
+                <UserInfo title="FULLNAME" info={user.username} />
+                <UserInfo title="PHONE NUMBER" info={user.phone_number} />
+                <UserInfo title="EMAIL ADDRESS" info={user.email} />
                 <UserInfo title="RELATIONSHIP" info="Sister``1" />
               </div>
             </div>
 
             <div>
               <div className="guarantor-2">
-                <UserInfo title="FULLNAME" info={selectedUser.username} />
-                <UserInfo
-                  title="PHONE NUMBER"
-                  info={selectedUser.phone_number}
-                />
-                <UserInfo title="EMAIL ADDRESS" info={selectedUser.email} />
+                <UserInfo title="FULLNAME" info={user.username} />
+                <UserInfo title="PHONE NUMBER" info={user.phone_number} />
+                <UserInfo title="EMAIL ADDRESS" info={user.email} />
                 <UserInfo title="RELATIONSHIP" info="Sister``1" />
               </div>
             </div>
