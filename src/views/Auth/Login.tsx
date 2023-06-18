@@ -1,27 +1,53 @@
 import { useState } from "react";
 import { useAuth } from "../../utils/authUtils";
-import { Container } from "reactstrap";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { pageRoutes } from "../../variables/pageRoutes";
+import { BRANND_IMAGES } from "../../assets/img/brand";
+import { Button, Input } from "reactstrap";
 
 export const Login = () => {
   const [user, setUser] = useState("");
+  const [password, setPassword] = useState("");
   const auth = useAuth();
-  const navigate =  useNavigate();
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     //@ts-expect-error
-    auth.login(user);
+    auth.login({ user, password });
     navigate(pageRoutes.DASHBOARD);
   };
   return (
-    <Container className="m-5">
-      <label htmlFor="">
-        Username:{" "}
-        <input type="text" onChange={(e) => setUser(e.target.value)} />
-      </label>
+    <div className="login-page">
+      <img src={BRANND_IMAGES.FullLogo} alt="" />
+      <div>
+        <div>
+          <img src={BRANND_IMAGES.LandingPagePic} alt="" />
+        </div>
+        <div>
+          <div>
+            <h1>Welcome!</h1>
+            <p>Enter details to login.</p>
+          </div>
+          <form action="">
+            <Input
+              placeholder="USERNAME"
+              type="text"
+              onChange={(e) => setUser(e.target.value)}
+            />
+            <Input
+              placeholder="PASSWORD"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
 
-      <button onClick={handleLogin}>Login</button>
-    </Container>
+            <NavLink to={""} onClick={() => {}}>
+              FORGOT PASSWORD?
+            </NavLink>
+
+            <Button onClick={handleLogin}>Login</Button>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 };

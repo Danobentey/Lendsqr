@@ -25,7 +25,7 @@ declare global {
 }
 
 const Sidebar = () => {
-  const [sidebarCollapse, setSidebarCollapse] = useState(false);
+  const [sidebarCollapse, setSidebarCollapse] = useState(true);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (event.target instanceof Node && !event.target.closest('.sidebar')) {
