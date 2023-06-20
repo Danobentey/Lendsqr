@@ -1,7 +1,22 @@
+@use "../../styles/colors.scss" as *;
+
 .dashboard {
   margin-left: 0;
+  a {
+    text-decoration: none;
+  }
   .card {
     min-width: 210px;
+    p {
+      margin-top: 12px;
+      margin-bottom: 0;
+      color: $dark;
+    }
+    b {
+      color: $primary-text;
+      font-size: 24px;
+      font-weight: 600;
+    }
   }
 }
 
